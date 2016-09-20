@@ -6,7 +6,7 @@ from __future__ import absolute_import, unicode_literals
 
 import datetime
 
-import fauxfactory
+import faker
 import pytest
 from gi.repository import Gtk
 from hamster_lib.helpers.config_helpers import HamsterAppDirs
@@ -81,10 +81,10 @@ def preferences_dialog(request, dummy_window, app, config):
 
 
 @pytest.fixture(params=(
-    fauxfactory.gen_string('utf8'),
-    fauxfactory.gen_string('cjk'),
-    fauxfactory.gen_string('latin1'),
-    fauxfactory.gen_string('cyrillic'),
+    faker.Faker().pystr_unicode(),
+    faker.Faker('zh_TW').job(),
+    faker.Faker('en_US').job(),
+    faker.Faker('ru_RU').job(),
 ))
 def word_parametrized(request):
     """Return a string paramized with various different charakter constelations."""
@@ -140,8 +140,8 @@ def fact_min_delta_parametrized(request):
 
 
 @pytest.fixture(params=(
-    fauxfactory.gen_utf8(),
-    fauxfactory.gen_latin1(),
+    faker.Faker().pystr_unicode(),
+    faker.Faker().file_name(),
 ))
 def tmpfile_path_parametrized(request, tmpdir):
     """Return a parametrized tmpfile_path value."""
@@ -157,8 +157,8 @@ def db_engine_parametrized(request):
 
 
 @pytest.fixture(params=(
-    fauxfactory.gen_utf8(),
-    fauxfactory.gen_latin1(),
+    faker.Faker().pystr_unicode(),
+    faker.Faker().file_name(),
     ':memory:',
 ))
 def db_path_parametrized(request, tmpdir):

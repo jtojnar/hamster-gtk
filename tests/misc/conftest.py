@@ -4,7 +4,6 @@
 
 import datetime
 
-import fauxfactory
 import pytest
 
 from hamster_gtk import overview
@@ -25,17 +24,17 @@ def daterange_offset_parametrized(request):
 
 
 @pytest.fixture
-def daterange(request):
+def daterange(request, faker):
     """Return a randomized daterange tuple."""
     offset = datetime.timedelta(days=7)
-    start = fauxfactory.gen_date()
+    start = faker.date_object()
     return (start, start + offset)
 
 
 @pytest.fixture
-def daterange_parametrized(request, daterange_offset_parametrized):
+def daterange_parametrized(request, daterange_offset_parametrized, faker):
     """Return daterange parametrized with various lengths."""
-    start = fauxfactory.gen_date()
+    start = faker.date_object()
     return (start, start + daterange_offset_parametrized)
 
 

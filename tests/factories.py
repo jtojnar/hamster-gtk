@@ -7,7 +7,6 @@ from __future__ import unicode_literals
 import datetime
 
 import factory
-import fauxfactory
 from future.utils import python_2_unicode_compatible
 from hamster_lib import objects
 
@@ -21,7 +20,7 @@ class CategoryFactory(factory.Factory):
     # ``LazyFunction`` seems sufficient it is not as we could not pass on the
     # string encoding. ``LazyAttribute`` allows us to specify a lambda that
     # circumvents this problem.
-    name = factory.LazyAttribute(lambda x: fauxfactory.gen_string('utf8'))
+    name = factory.LazyAttribute(lambda x: factory.Faker('pystr'))
 
     class Meta:
         model = objects.Category
